@@ -21,6 +21,7 @@ def hammingDistance(sequenceA, sequenceB):
 	return distance
 # end hammingDistance
 
+# main block
 filename = raw_input("Path to Rosalind Input File: ").strip()
 try:
 	f = open(filename, "r")
