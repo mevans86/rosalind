@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import sys
-
->>>>>>> Consensus & profile; FASTA reader template
 def probability_of_dominant_phenotype(KMNstring):	
 	"""Given: Three positive integers k, m, and n, representing a population containing k+m+n organisms:
 	k individuals are homozygous dominant for a factor, m are heterozygous, and n are homozygous recessive.
@@ -36,11 +31,5 @@ try:
 except IOError:
 	print "A file does not exist at this location, or some other I/O error occurred. Peace out!"
 	sys.exit()
-<<<<<<< HEAD
 print "Probability of the dominant phenotype:"
 print probability_of_dominant_phenotype(f.readline())
-=======
-
-prob = probability_of_dominant_phenotype(f.readline())
-print "\nProbability of the dominant phenotype: " + str(prob) + "\n"
->>>>>>> Consensus & profile; FASTA reader template
