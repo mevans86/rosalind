@@ -1,6 +1,10 @@
 def dictionary_from_FASTA_file(filename):
+<<<<<<< HEAD
 	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
 	must end with a new line character; otherwise, the last sequence will be missed!"""
+=======
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
+>>>>>>> Consensus & profile; FASTA reader template
 	try:
 		f = open(filename, "r")
 	except IOError:
@@ -34,5 +38,9 @@ def longest_common_substr(listOfStrings):
 
 # main block
 fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File: ").strip())
+<<<<<<< HEAD
 print "Longest motif common to all sequences:"
 print longest_common_substr(fDict.values())
+=======
+print "Longest motif common to all sequences: " + longest_common_substr(fDict.values())
+>>>>>>> Consensus & profile; FASTA reader template
