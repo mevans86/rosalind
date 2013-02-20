@@ -1,6 +1,10 @@
 def dictionary_from_FASTA_file(filename):
+<<<<<<< HEAD
 	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
 	must end with a new line character; otherwise, the last sequence will be missed!"""
+=======
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
+>>>>>>> Consensus & profile; FASTA reader template
 	try:
 		f = open(filename, "r")
 	except IOError:
@@ -21,9 +25,15 @@ def dictionary_from_FASTA_file(filename):
 	return fastaDict
 # end dictionary_from_FASTA_file
 
+<<<<<<< HEAD
 def percent_GC(seq):
 	"""Given a continuous DNA sequence, returns the percentage of G and C nucleotides."""
 	return (seq.count("G") + seq.count("C")) / float(len(seq)) * 100
+=======
+def percent_GC(dnaString):
+	"""Given a continuous DNA sequence, returns the percentage of G and C nucleotides."""
+	return (dnaString.count("G") + dnaString.count("C")) / float(len(dnaString)) * 100
+>>>>>>> Consensus & profile; FASTA reader template
 # end percent_GC
 
 # main block
