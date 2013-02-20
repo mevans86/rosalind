@@ -1,10 +1,7 @@
-import sys
-
-def probabilityOfDominantPhenotype(KMNstring):	
+def probability_of_dominant_phenotype(KMNstring):	
 	"""Given: Three positive integers k, m, and n, representing a population containing k+m+n organisms:
 	k individuals are homozygous dominant for a factor, m are heterozygous, and n are homozygous recessive.
-	
-	Returns: The probability that two randomly selected mating organisms will produce an individual possessing
+	Returns the probability that two randomly selected mating organisms will produce an individual possessing
 	a dominant allele (and thus displaying the dominant phenotype). Assume that any two organisms can mate."""
 
 	homozygousDominantCount = int(KMNstring.split(" ")[0])
@@ -26,14 +23,13 @@ def probabilityOfDominantPhenotype(KMNstring):
 	finalProbability += (RecRecProbability * heterozygousCount / (total - 1.0) * 0.5)
 	
 	return finalProbability
-# end probabilityOfDominantPhenotype
+# end probability_of_dominant_phenotype
 
-filename = raw_input("Path to Rosalind Input File: ").strip()
+# main block
 try:
-	f = open(filename, "r")
+	f = open(raw_input("Path to Rosalind Input File: ").strip(), "r")
 except IOError:
 	print "A file does not exist at this location, or some other I/O error occurred. Peace out!"
 	sys.exit()
-
-prob = probabilityOfDominantPhenotype(f.readline())
-print "\nProbability of the dominant phenotype: " + str(prob) + "\n"
+print "Probability of the dominant phenotype:"
+print probability_of_dominant_phenotype(f.readline())

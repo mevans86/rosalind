@@ -1,21 +1,15 @@
-def reverseComplement(DNAstring):
-	"""Given: A DNA string s of length at most 1000 bp.
-			
-	Return: The reverse complement sc of s."""
+def reverse_complement(seq):
+	"""Given: a DNA string seq, return the reverse complement of seq."""
+	rev = seq[::-1]
+	complements = { "G":"C", "C":"G", "A":"T", "T":"A" }
+	return "".join([complements[base] for base in rev])
+# end reverse_complement
 
-	reversedSequence = DNAstring[::-1]
-	complement = { "G" : "C", "C" : "G", "A": "T", "T": "A" }
-	reversedSequenceList = []
-	for base in reversedSequence[:]:
-		reversedSequenceList.extend(base)
-	return "".join([complement[base] for base in reversedSequenceList])
-
-filename = raw_input("Path to Rosalind Input File: ").strip()
+# main block
 try:
-	f = open(filename, "r")
+	f = open(raw_input("Path to Rosalind Input File: ").strip(), "r")
 except IOError:
 	print "A file does not exist at this location, or some other I/O error occurred. Peace out!"
 	sys.exit()
-
-rcSeq = reverseComplement(f.readline()[:-1])
-print "\nReverse complement of the sequence provided: " + str(rcSeq) + "\n"
+print "Reverse complement of the sequence provided:"
+print reverse_complement(f.readline()[:-1])

@@ -1,24 +1,25 @@
-def dictionaryFromFASTAFile(filename):
-	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
+def dictionary_from_FASTA_file(filename):
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
+	must end with a new line character; otherwise, the last sequence will be missed!"""
 	try:
 		f = open(filename, "r")
 	except IOError:
 		print "A file does not exist at this location, or some other I/O error occurred."
 		return ""
 	fastaDict = { }
-	sequence_id = 0
-	naSequence = ""
+	seq_id = 0
+	seq = ""
 	for line in f:
 		if(line[0] == ">"):
-			if(sequence_id != 0):
-				fastaDict[sequence_id] = naSequence
-			sequence_id = line[1:-1]
-			naSequence = ""
+			if(seq_id != 0):
+				fastaDict[seq_id] = seq
+			seq_id = line[1:-1]
+			seq = ""
 		else:
-			naSequence += line[:-1]
-	fastaDict[sequence_id] = naSequence # last id:sequence pair, hanging around
+			seq += line[:-1]
+	fastaDict[seq_id] = seq # last id:sequence pair, hanging around
 	return fastaDict
-# end dictionaryFromFASTAFile
+# end dictionary_from_FASTA_file
 
 def longest_common_substr(listOfStrings):
 	"""Given a list of strings, return the longest substring common to all of them."""
@@ -32,5 +33,6 @@ def longest_common_substr(listOfStrings):
 # end longest_common_substr
 
 # main block
-fDict = dictionaryFromFASTAFile(raw_input("Path to Rosalind Input File: ").strip())
-print "Longest motif common to all sequences: " + longest_common_substr(fDict.values())
+fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File: ").strip())
+print "Longest motif common to all sequences:"
+print longest_common_substr(fDict.values())

@@ -1,10 +1,7 @@
-def transcribeDNA(dnaSequence):
-	"""Given: A DNA string t having length at most 1000 nt.
-			
-	Return: The transcribed RNA string of t."""
-	
-	return dnaSequence.replace("T", "U")
-# end transcribeDNA
+def transcribe_DNA(seq):
+	"""Given a DNA string t, return the transcribed RNA string of t."""
+	return seq.replace("T", "U")
+# end transcribe_DNA
 
 filename = raw_input("Path to Rosalind Input File: ").strip()
 try:
@@ -12,6 +9,5 @@ try:
 except IOError:
 	print "A file does not exist at this location, or some other I/O error occurred. Peace out!"
 	sys.exit()
-
-mrnaSeq = transcribeDNA(f.readline())
-print "\nmRNA derived from provided DNA: " + str(mrnaSeq) + "\n"
+print "mRNA derived from provided DNA:"
+print transcribe_DNA(f.readline()[:-1])

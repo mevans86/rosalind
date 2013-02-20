@@ -1,38 +1,40 @@
-def dictionaryFromFASTAFile(filename):
-	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
+def dictionary_from_FASTA_file(filename):
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
+	must end with a new line character; otherwise, the last sequence will be missed!"""
 	try:
 		f = open(filename, "r")
 	except IOError:
 		print "A file does not exist at this location, or some other I/O error occurred."
 		return ""
 	fastaDict = { }
-	sequence_id = 0
-	naSequence = ""
+	seq_id = 0
+	seq = ""
 	for line in f:
 		if(line[0] == ">"):
-			if(sequence_id != 0):
-				fastaDict[sequence_id] = naSequence
-			sequence_id = line[1:-1]
-			naSequence = ""
+			if(seq_id != 0):
+				fastaDict[seq_id] = seq
+			seq_id = line[1:-1]
+			seq = ""
 		else:
-			naSequence += line[:-1]
-	fastaDict[sequence_id] = naSequence # last id:sequence pair, hanging around
+			seq += line[:-1]
+	fastaDict[seq_id] = seq # last id:sequence pair, hanging around
 	return fastaDict
-# end dictionaryFromFASTAFile
+# end dictionary_from_FASTA_file
 
-def percentGC(dnaString):
+def percent_GC(seq):
 	"""Given a continuous DNA sequence, returns the percentage of G and C nucleotides."""
-	return (dnaString.count("G") + dnaString.count("C")) / float(len(dnaString)) * 100
-# end percentGC
+	return (seq.count("G") + seq.count("C")) / float(len(seq)) * 100
+# end percent_GC
 
 # main block
-fDict = dictionaryFromFASTAFile(raw_input("Path to Rosalind Input File: ").strip())
+fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File: ").strip())
 maxGC = 0
 idOfmaxGC = ""
 for seq_id in fDict.keys():
-	currentGC = percentGC(fDict[seq_id])
+	currentGC = percent_GC(fDict[seq_id])
 	if(currentGC > maxGC):
 		maxGC = currentGC
 		idOfmaxGC = seq_id
-print "NA sequence with maximum GC content:"
-print str(idOfmaxGC) + "\n" + str(maxGC)
+print "Sequence with greatest GC content:"
+print idOfmaxGC
+print maxGC
