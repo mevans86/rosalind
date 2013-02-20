@@ -6,19 +6,19 @@ def dictionary_from_FASTA_file(filename):
 		print "A file does not exist at this location, or some other I/O error occurred."
 		return { }
 	fastaDict = { }
-	sequence_id = 0
-	naSequence = ""
+	seq_id = 0
+	seq = ""
 	for line in f:
 		if(line[0] == ">"):
-			if(sequence_id != 0):
-				fastaDict[sequence_id] = naSequence
-			sequence_id = line[1:-1]
-			naSequence = ""
+			if(seq_id != 0):
+				fastaDict[seq_id] = seq
+			seq_id = line[1:-1]
+			seq = ""
 		else:
-			naSequence += line[:-1]
-	fastaDict[sequence_id] = naSequence # last id:sequence pair, hanging around
+			seq += line[:-1]
+	fastaDict[seq_id] = seq # last id:sequence pair, hanging around
 	return fastaDict
 # end dictionary_from_FASTA_file
 
 # main block
-fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File: ").strip())
+fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File (FASTA): ").strip())
