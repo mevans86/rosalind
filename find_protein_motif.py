@@ -1,7 +1,11 @@
 import re
 import urllib2
 
+<<<<<<< HEAD
 def parse_FASTA_string(fasta):
+=======
+def dictionaryFromFASTAString(fastaString):
+>>>>>>> Consensus & profile; FASTA reader template
 	"""Given a string in FASTA format, return a dictionary of id:sequence key-value pairs."""
 	fastaDict = { }
 	seq_id = 0
@@ -16,7 +20,11 @@ def parse_FASTA_string(fasta):
 			seq += line
 	fastaDict[seq_id] = seq # last id:sequence pair, hanging around
 	return fastaDict
+<<<<<<< HEAD
 # end parse_FASTA_string
+=======
+# end dictionaryFromFASTAString
+>>>>>>> Consensus & profile; FASTA reader template
 
 def dictionary_from_FASTA_URL(fastaURL):
 	"""Given a URL to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
@@ -27,7 +35,11 @@ def dictionary_from_FASTA_URL(fastaURL):
 		sys.exit()
 	fasta = response.read()
 
+<<<<<<< HEAD
 	return parse_FASTA_string(fasta)
+=======
+	return dictionaryFromFASTAString(fastaString)
+>>>>>>> Consensus & profile; FASTA reader template
 # end dictionary_from_FASTA_URL
 
 def find_protein_motif(motifString, protein):
