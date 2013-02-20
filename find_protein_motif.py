@@ -36,7 +36,7 @@ def find_protein_motif(motifString, protein):
 
 	reMotif = re.sub(r"\{(.)\}", r"[^\1]", motifString)
 	output = ""
-	for hit in re.finditer('(?=%s)' % reMotif, protein):
+	for hit in re.finditer("(?=%s)" % reMotif, protein):
 		output += (str(hit.start() + 1) + " ")
 	return output.strip()
 # end find_protein_motif
