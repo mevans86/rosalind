@@ -1,33 +1,33 @@
 def dictionary_from_FASTA_file(filename):
-	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The FASTA file
-	must end in a newline character!"""
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
+	must end in a newline character; otherwise the last sequence will not be read!"""
 	try:
 		f = open(filename, "r")
 	except IOError:
 		print "A file does not exist at this location, or some other I/O error occurred."
 		return { }
 	fastaDict = { }
-	sequence_id = 0
-	naSequence = ""
+	seq_id = 0
+	seq = ""
 	for line in f:
 		if(line[0] == ">"):
-			if(sequence_id != 0):
-				fastaDict[sequence_id] = naSequence
-			sequence_id = line[1:-1]
-			naSequence = ""
+			if(seq_id != 0):
+				fastaDict[seq_id] = seq
+			seq_id = line[1:-1]
+			seq = ""
 		else:
-			naSequence += line[:-1]
-	fastaDict[sequence_id] = naSequence # last id:sequence pair, hanging around
+			seq += line[:-1]
+	fastaDict[seq_id] = seq # last id:sequence pair, hanging around
 	return fastaDict
 # end dictionary_from_FASTA_file
 
-def profile_matrix_DNA(dna_strings_list):
+def profile_matrix_dna(dnaStrings):
 	"""Given a list of DNA sequences, return the profile matrix for the list."""
 	pMatrix = { }
-	if(not len(dna_strings_list) > 0):
+	if(not len(dnaStrings) > 0):
 		print "Error generating profile matrix: array of DNA sequences is empty."
 		return pMatrix
-	for sequence in dna_strings_list:
+	for sequence in dnaStrings:
 		for i in range(len(sequence)):
 			if(sequence[i] == "A"):
 				if(not 0 in pMatrix.keys()):
@@ -46,13 +46,28 @@ def profile_matrix_DNA(dna_strings_list):
 					pMatrix[3] = [ 0 ] * len(sequence)
 				pMatrix[3][i] += 1
 	return pMatrix
-# end profile_matrix_DNA
+# end profile_matrix_dna
+
+def consensus_string_dna(profileMatrix):
+	"""Given a profile matrix for a set of DNA strings, return a consensus
+	string for the collection. Not ideal at this point."""
+	maxBaseIndices = [None]*len(profileMatrix[0])
+	for i in range(len(profileMatrix[0])):
+		currMax = 0
+		for j in range(4):
+			if(max(currMax, profileMatrix[j][i]) > currMax):
+				currMax = max(currMax, profileMatrix[j][i])
+				maxBaseIndices[i] = str(j)
+	return "".join(maxBaseIndices).replace("0", "A").replace("1", "C").replace("2", "G").replace("3", "T")
+# end consensus_string_dna
 
 # main block
 fDict = dictionary_from_FASTA_file(raw_input("Path to Rosalind Input File: ").strip())
 seqList = fDict.values()
 print "Profile matrix for input:"
-print "A: " + str(profile_matrix_DNA(seqList)[0])
-print "C: " + str(profile_matrix_DNA(seqList)[1])
-print "G: " + str(profile_matrix_DNA(seqList)[2])
-print "T: " + str(profile_matrix_DNA(seqList)[3])
+print "A: " + str(profile_matrix_dna(seqList)[0])
+print "C: " + str(profile_matrix_dna(seqList)[1])
+print "G: " + str(profile_matrix_dna(seqList)[2])
+print "T: " + str(profile_matrix_dna(seqList)[3])
+print "Consensus string:"
+print consensus_string_dna(profile_matrix_dna(seqList))

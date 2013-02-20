@@ -1,5 +1,6 @@
 def dictionary_from_FASTA_file(filename):
-	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs."""
+	"""Given a path to a FASTA file, returns a dictionary of id:sequence key-value pairs. The file
+	must end in a newline character; otherwise the last sequence will not be read!"""
 	try:
 		f = open(filename, "r")
 	except IOError:
