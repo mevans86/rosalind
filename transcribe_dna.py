@@ -3,6 +3,7 @@ def transcribe_DNA(seq):
 	return seq.replace("T", "U")
 # end transcribe_DNA
 
+# main block
 filename = raw_input("Path to Rosalind Input File: ").strip()
 try:
 	f = open(filename, "r")
