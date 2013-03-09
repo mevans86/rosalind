@@ -2,6 +2,9 @@ import itertools
 import math
 
 def sorted_sequences(alphabet, length):
+	"""Returns a list of tuples, each of which is a sequence of length length with letters
+	contained in the given alphabet. Tuples are sorted alphabetically, based on the alphabet
+	string provided."""
 	return list(itertools.product(alphabet, repeat=length))
 # end sorted_sequences
 
